@@ -1,0 +1,37 @@
+{% schema %}
+{
+  "name": "Countdown Timer",
+  "target": "section",
+  "templates": ["product"],
+  "settings": []
+}
+{% endschema %}
+
+{% if product %}
+
+<div {{ block.shopify_attributes }} 
+     id="countdown-timer-root" 
+     data-product-id="{{ product.id }}" 
+     data-product-gid="gid://shopify/Product/{{ product.id }}"
+     data-shop-domain="{{ shop.permanent_domain }}">
+  <div style="padding: 20px; background: #f0f0f0; border: 1px dashed #ccc; text-align: center;">
+    <p>Loading countdown timer...</p>
+    <p style="font-size: 0.8em; color: #666;">Product ID: {{ product.id }}</p>
+    <p style="font-size: 0.8em; color: #666;">Shop: {{ shop.permanent_domain }}</p>
+  </div>
+</div>
+
+<script src="{{ 'timer-widget.js' | asset_url }}" defer="defer"></script>
+
+<style>
+  #countdown-timer-root {
+    margin: 20px 0;
+  }
+</style>
+
+{% else %}
+<div style="padding: 20px; background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; text-align: center;">
+  <p style="margin: 0; color: #856404;">⚠️ Countdown Timer can only be used on product pages</p>
+  <p style="margin: 10px 0 0 0; font-size: 0.8em; color: #666;">Please add this block to a product template section</p>
+</div>
+{% endif %}
